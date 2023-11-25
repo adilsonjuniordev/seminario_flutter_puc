@@ -4,7 +4,6 @@
 [![forthebadge](https://forthebadge.com/images/badges/powered-by-coffee.svg)](http://forthebadge.com)
 
 [![MIT License](https://img.shields.io/badge/Flutter-3.16-blue)](https://docs.flutter.dev/release/release-notes)
-
 [![MIT License](https://img.shields.io/badge/Dart-3.2.0-blue)](https://docs.flutter.dev/release/release-notes)
 
 Projeto desenvolvido em 11/2023, utilizando o framework Flutter, com o intuito de ministrar um seminário para os alunos da Puc Minas e fazer uma imersão completa, afim de conhecer os conceitos da linguagem e aprimorar os conhecimentos em programação.
