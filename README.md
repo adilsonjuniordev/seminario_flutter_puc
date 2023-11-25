@@ -1,6 +1,7 @@
 # Seminário Puc Minas (Flutter)
 
 [![forthebadge](https://forthebadge.com/images/badges/made-with-flutter.svg)](http://forthebadge.com)
+
 [![forthebadge](https://forthebadge.com/images/badges/powered-by-coffee.svg)](http://forthebadge.com)
 
 [![MIT License](https://img.shields.io/badge/Flutter-3.16-blue)](https://docs.flutter.dev/release/release-notes) [![MIT License](https://img.shields.io/badge/Dart-3.2.0-blue)](https://docs.flutter.dev/release/release-notes)
@@ -9,7 +10,7 @@ Projeto desenvolvido em 11/2023, utilizando o framework Flutter, com o intuito d
 
 ## Stack utilizada
 
-**Mobile:** Flutter (SDK versão inicial: 3.13.0)
+**Mobile:** Flutter (SDK versão inicial: 3.16)
 
 ## Packages utilizados
 
