@@ -1,6 +1,7 @@
-# Color LS
+# Seminário Puc Minas (Flutter)
 
 [![forthebadge](https://forthebadge.com/images/badges/made-with-flutter.svg)](http://forthebadge.com)
+
 [![forthebadge](https://forthebadge.com/images/badges/powered-by-coffee.svg)](http://forthebadge.com)
 
 [![MIT License](https://img.shields.io/badge/Flutter-3.16-blue)](https://docs.flutter.dev/release/release-notes) [![MIT License](https://img.shields.io/badge/Dart-3.2.0-blue)](https://docs.flutter.dev/release/release-notes)
