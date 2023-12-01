@@ -93,21 +93,6 @@ class _LoginPageState extends State<LoginPage> {
                     FocusScope.of(context).unfocus();
                   },
                 ),
-                const SizedBox(height: 15),
-                TextFormField(
-                  controller: passwordConfirmEC,
-                  validator: Validatorless.multiple([
-                    Validatorless.required('Confirma senha é obrigatório'),
-                    Validatorless.min(8, 'Senha muito fraca'),
-                    Validatorless.compare(passwordEC, 'Senhas não conferem'),
-                  ]),
-                  decoration: const InputDecoration(hintText: 'Confirma senha'),
-                  keyboardType: TextInputType.visiblePassword,
-                  obscureText: true,
-                  onTapOutside: (pointer) {
-                    FocusScope.of(context).unfocus();
-                  },
-                ),
                 const SizedBox(height: 40),
                 ElevatedButton(
                   onPressed: () {
