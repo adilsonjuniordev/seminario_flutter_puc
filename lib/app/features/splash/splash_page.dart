@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:puc_minas/app/core/constants/app_assets.dart';
 import 'package:puc_minas/app/core/constants/app_routes.dart';
+import 'package:puc_minas/app/features/splash/splash_controller.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -46,8 +47,19 @@ class _SplashPageState extends State<SplashPage> {
             Padding(
               padding: const EdgeInsets.fromLTRB(40, 0, 40, 0),
               child: ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pushNamed(AppRoutes.login);
+                onPressed: () async {
+                  if (await isLogged()) {
+                    if (mounted) {
+                      Navigator.of(context).pushNamedAndRemoveUntil(
+                        AppRoutes.home,
+                        (route) => false,
+                      );
+                    }
+                  } else {
+                    if (mounted) {
+                      Navigator.of(context).pushNamed(AppRoutes.login);
+                    }
+                  }
                 },
                 child: const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
