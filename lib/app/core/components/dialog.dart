@@ -5,20 +5,27 @@ void showLoader(BuildContext context) {
       context: context,
       barrierDismissible: false,
       builder: (context) {
-        return Center(
+        return Dialog(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          elevation: 10,
+          backgroundColor: Colors.transparent,
           child: Container(
             height: 150,
             width: 250,
             decoration: BoxDecoration(
               color: Colors.black45,
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(20),
             ),
             child: const Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                CircularProgressIndicator(
-                  color: Colors.lightGreen,
-                ),
+                CircularProgressIndicator(color: Colors.lightGreen),
+                SizedBox(height: 20),
+                Text('Carregando...',
+                    style: TextStyle(
+                      color: Colors.lightGreen,
+                      fontWeight: FontWeight.bold,
+                    )),
               ],
             ),
           ),

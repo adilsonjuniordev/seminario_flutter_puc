@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
@@ -6,11 +5,13 @@ class CustomSnackbar {
   final BuildContext context;
   final String message;
   final Color backgroundColor;
+  final Duration? duration;
 
   CustomSnackbar.success({
     required this.context,
     required this.message,
     this.backgroundColor = Colors.lightGreen,
+    this.duration,
   }) {
     showSnackBar(context: context, message: message, color: backgroundColor);
   }
@@ -19,6 +20,16 @@ class CustomSnackbar {
     required this.context,
     required this.message,
     this.backgroundColor = Colors.red,
+    this.duration,
+  }) {
+    showSnackBar(context: context, message: message, color: backgroundColor);
+  }
+
+  CustomSnackbar.warning({
+    required this.context,
+    required this.message,
+    this.backgroundColor = Colors.blueGrey,
+    this.duration,
   }) {
     showSnackBar(context: context, message: message, color: backgroundColor);
   }
@@ -27,9 +38,12 @@ class CustomSnackbar {
     required BuildContext context,
     required String message,
     required Color color,
+    Duration? duration,
   }) {
+    ScaffoldMessenger.of(context).hideCurrentSnackBar();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
+        duration: duration ?? 2.seconds,
         content: Text(
           message,
           style: const TextStyle(

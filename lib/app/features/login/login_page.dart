@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:puc_minas/app/core/components/custom_snackbar.dart';
 import 'package:puc_minas/app/core/components/dialog.dart';
@@ -21,7 +19,6 @@ class _LoginPageState extends State<LoginPage> {
   final nameEC = TextEditingController();
   final ageEC = TextEditingController();
   final passwordEC = TextEditingController();
-  final passwordConfirmEC = TextEditingController();
 
   bool marcaCheckBox = true;
 
@@ -30,15 +27,17 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Login'),
-        leading: IconButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          icon: const Icon(
-            Icons.arrow_circle_left_outlined,
-            size: 34,
-          ),
-        ),
+        leading: Navigator.of(context).canPop()
+            ? IconButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                icon: const Icon(
+                  Icons.arrow_circle_left_outlined,
+                  size: 34,
+                ),
+              )
+            : null,
       ),
       body: SingleChildScrollView(
         child: Center(
@@ -91,7 +90,7 @@ class _LoginPageState extends State<LoginPage> {
                     controller: passwordEC,
                     validator: Validatorless.multiple([
                       Validatorless.required('Senha é obrigatória'),
-                      Validatorless.min(8, 'Senha muito fraca'),
+                      Validatorless.min(8, 'Senha muito fraca (mín. 8 caracteres)'),
                     ]),
                     decoration: const InputDecoration(hintText: 'Senha'),
                     keyboardType: TextInputType.visiblePassword,
@@ -101,50 +100,31 @@ class _LoginPageState extends State<LoginPage> {
                     },
                   ),
                   const SizedBox(height: 15),
-                  TextFormField(
-                    controller: passwordConfirmEC,
-                    validator: Validatorless.multiple([
-                      Validatorless.required('Confirma senha é obrigatório'),
-                      Validatorless.min(8, 'Senha muito fraca'),
-                      Validatorless.compare(passwordEC, 'Senhas não conferem'),
-                    ]),
-                    decoration: const InputDecoration(hintText: 'Confirma senha'),
-                    keyboardType: TextInputType.visiblePassword,
-                    obscureText: true,
-                    onTapOutside: (pointer) {
-                      FocusScope.of(context).unfocus();
-                    },
-                  ),
                   const SizedBox(height: 40),
                   ElevatedButton(
                     onPressed: () async {
-                      formKey.currentState?.validate();
+                      if (formKey.currentState?.validate() ?? false) {
+                        showLoader(context);
+                        bool isLogged = await login(
+                          email: emailEC.text,
+                          password: passwordEC.text,
+                          name: nameEC.text,
+                          age: int.tryParse(ageEC.text) ?? 0,
+                        );
 
-                      showLoader(context);
-                      bool isLogged = await login(
-                        email: emailEC.text,
-                        password: passwordEC.text,
-                        name: nameEC.text,
-                        age: int.tryParse(ageEC.text) ?? 0,
-                      );
-
-                      if (mounted) {
-                        Navigator.of(context).pop();
-                      }
-
-                      if (isLogged) {
                         if (mounted) {
+                          Navigator.of(context).pop();
+                        }
+
+                        if (isLogged) {
                           if (mounted) {
                             CustomSnackbar.success(context: context, message: 'Seja bem-vindo(a)');
+                            Navigator.of(context).pushNamedAndRemoveUntil(AppRoutes.home, (route) => false);
                           }
-                          Navigator.of(context).pushNamedAndRemoveUntil(
-                            AppRoutes.home,
-                            (route) => false,
-                          );
-                        }
-                      } else {
-                        if (mounted) {
-                          CustomSnackbar.error(context: context, message: 'Usuário ou senha inválidos');
+                        } else {
+                          if (mounted) {
+                            CustomSnackbar.error(context: context, message: 'Usuário ou senha inválidos');
+                          }
                         }
                       }
                     },

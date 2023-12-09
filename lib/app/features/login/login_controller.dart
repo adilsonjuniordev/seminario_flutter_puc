@@ -5,12 +5,10 @@ Future<bool> login({required String email, required String password, required St
   SharedPreferences prefs = await SharedPreferences.getInstance();
 
   await Future.delayed(2.seconds);
-  if (email == 'aluno@puc.br' && password == '12345678') {
-    await prefs.setBool('logged', true);
-    await prefs.setString('email', email);
-    await prefs.setString('name', name);
-    await prefs.setInt('age', age);
-    return true;
-  }
-  return false;
+
+  await prefs.setBool('logged', true);
+  await prefs.setString('email', email);
+  await prefs.setString('name', name);
+  await prefs.setInt('age', age);
+  return true;
 }
