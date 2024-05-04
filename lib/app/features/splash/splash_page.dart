@@ -50,14 +50,14 @@ class _SplashPageState extends State<SplashPage> {
                 child: ElevatedButton(
                   onPressed: () async {
                     if (await isLogged()) {
-                      if (mounted) {
+                      if (context.mounted) {
                         Navigator.of(context).pushNamedAndRemoveUntil(
                           AppRoutes.home,
                           (route) => false,
                         );
                       }
                     } else {
-                      if (mounted) {
+                      if (context.mounted) {
                         Navigator.of(context).pushNamed(AppRoutes.login);
                       }
                     }

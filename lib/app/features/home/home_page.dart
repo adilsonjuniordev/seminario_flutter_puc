@@ -23,6 +23,8 @@ class _HomePageState extends State<HomePage> {
   String? name;
   String? age;
 
+  final controller = HomeController();
+
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
@@ -51,8 +53,8 @@ class _HomePageState extends State<HomePage> {
 
               if (signOut ?? false) {
                 try {
-                  await logout();
-                  if (mounted) {
+                  await controller.logout();
+                  if (context.mounted) {
                     CustomSnackbar.warning(
                       context: context,
                       message: 'Você foi deslogado com sucesso',
@@ -63,7 +65,7 @@ class _HomePageState extends State<HomePage> {
                     );
                   }
                 } catch (e) {
-                  if (mounted) {
+                  if (context.mounted) {
                     CustomSnackbar.error(
                       context: context,
                       message: 'Houve um problema ao fazer logout',
@@ -124,7 +126,7 @@ class _HomePageState extends State<HomePage> {
                             if (deleted ?? false) {
                               try {
                                 tasks.removeAt(index);
-                                if (mounted) {
+                                if (context.mounted) {
                                   CustomSnackbar.warning(
                                     context: context,
                                     message: 'A tarefa foi excluída!',
@@ -132,7 +134,7 @@ class _HomePageState extends State<HomePage> {
                                 }
                                 setState(() {});
                               } catch (e) {
-                                if (mounted) {
+                                if (context.mounted) {
                                   CustomSnackbar.error(
                                     context: context,
                                     message: 'Erro ao excluir tarefa!',

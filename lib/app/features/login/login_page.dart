@@ -14,6 +14,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final formKey = GlobalKey<FormState>();
+  final controller = LoginController();
 
   final emailEC = TextEditingController();
   final nameEC = TextEditingController();
@@ -105,24 +106,24 @@ class _LoginPageState extends State<LoginPage> {
                     onPressed: () async {
                       if (formKey.currentState?.validate() ?? false) {
                         showLoader(context);
-                        bool isLogged = await login(
+                        bool isLogged = await controller.login(
                           email: emailEC.text,
                           password: passwordEC.text,
                           name: nameEC.text,
                           age: int.tryParse(ageEC.text) ?? 0,
                         );
 
-                        if (mounted) {
+                        if (context.mounted) {
                           Navigator.of(context).pop();
                         }
 
                         if (isLogged) {
-                          if (mounted) {
+                          if (context.mounted) {
                             CustomSnackbar.success(context: context, message: 'Seja bem-vindo(a)');
                             Navigator.of(context).pushNamedAndRemoveUntil(AppRoutes.home, (route) => false);
                           }
                         } else {
-                          if (mounted) {
+                          if (context.mounted) {
                             CustomSnackbar.error(context: context, message: 'Usuário ou senha inválidos');
                           }
                         }
